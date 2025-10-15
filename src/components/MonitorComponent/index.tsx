@@ -36,16 +36,6 @@ export default function MonitorComponent() {
   // Contador para manejar la persistencia del error (evitar alertas fugaces)
   const badPostureCounter = useRef(0);
 
-  // Función para reproducir el sonido de alerta
-  const playAlertSound = useCallback(() => {
-    if (audioRef.current) {
-      audioRef.current.currentTime = 0; // Reiniciar el sonido
-      audioRef.current.play().catch(e => {
-        console.warn("Fallo al reproducir el sonido (posiblemente bloqueado por el navegador).", e);
-      });
-    }
-  }, []);
-
   // Función para lanzar la notificación del sistema
   const launchSystemNotification = useCallback(() => {
     // 1. Aseguramos que las Notificaciones existen
@@ -171,13 +161,12 @@ export default function MonitorComponent() {
         if (validAngles.length > 0) {
           avgAngle = validAngles.reduce((a, b) => a + b, 0) / validAngles.length;
 
-          if (avgAngle < ENCORVADO_UMBRAL) {
+          if (avgAngle > ENCORVADO_UMBRAL) {
             badPostureCounter.current += 1;
             currentMessage = `¡ALERTA! Ángulo promedio ${avgAngle.toFixed(1)}° < ${ENCORVADO_UMBRAL}°.`;
 
             if (badPostureCounter.current >= BAD_POSTURE_FRAMES) {
               isCurrentlyGood = false;
-              playAlertSound();
               launchSystemNotification();
             } else {
               isCurrentlyGood = true; // Sigue siendo verde, pero advertimos
@@ -227,7 +216,7 @@ export default function MonitorComponent() {
 
     // Continuar el bucle
     animationFrameId.current = requestAnimationFrame(detectPoseInRealTime);
-  }, [detector, drawPose, playAlertSound, launchSystemNotification]);
+  }, [detector, drawPose, launchSystemNotification]);
 
 
   // --- Lógica de la Webcam y Stream ---
@@ -243,14 +232,6 @@ export default function MonitorComponent() {
       cancelAnimationFrame(animationFrameId.current);
       animationFrameId.current = null;
     }
-    // Resetea las métricas al detener
-    setPostureMetrics({
-      totalFrames: 0,
-      goodFrames: 0,
-      posturePercentage: 0,
-      leftAngle: 0,
-      rightAngle: 0,
-    });
 
     setMonitorState(s => ({
       isRunning: false,

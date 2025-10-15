@@ -1,6 +1,6 @@
 
 // --- CONFIGURACIÓN DE IA Y MODELO ---
-export const ENCORVADO_UMBRAL = 160; // 160 grados: Si es menor, se considera encorvado
+export const ENCORVADO_UMBRAL = 145; // grados: Si es mayor, se considera encorvado
 export const BAD_POSTURE_FRAMES = 10; // Frames para confirmar mala postura (aprox. 0.3-0.5 segundos)
 
 // Definición manual de las conexiones del esqueleto para MoveNet (17 puntos)

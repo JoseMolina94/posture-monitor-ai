@@ -1,7 +1,14 @@
 import { Keypoint } from "@/types";
 
+const defaultValue: Keypoint = {
+  x: 0,
+  y: 0,
+  score: 0,
+  name: ''
+}
+
 // Función de utilidad para calcular el ángulo entre tres puntos (A, B, C) donde B es el vértice
-export const calculateAngle = (A: Keypoint, B: Keypoint, C: Keypoint): number => {
+export const calculateAngle = (A: Keypoint = defaultValue, B: Keypoint = defaultValue, C: Keypoint = defaultValue): number => {
   const vectorBA = [A.x - B.x, A.y - B.y];
   const vectorBC = [C.x - B.x, C.y - B.y];
 
