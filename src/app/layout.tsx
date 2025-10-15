@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import Script from 'next/script';
+
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -22,8 +24,8 @@ export default function RootLayout({
           conflictos de módulos ('Export Pose' error) con Next.js/Turbopack.
           Esto hace que 'tf' y 'poseDetection' estén disponibles globalmente en 'window'.
         */}
-        <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.22.0/dist/tf.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/pose-detection@2.1.3/dist/pose-detection.min.js"></script>
+        <Script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.22.0/dist/tf.min.js" strategy="beforeInteractive" />
+        <Script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/pose-detection@2.1.3/dist/pose-detection.min.js" strategy="beforeInteractive" />
       </head>
       <body className={inter.className}>
         {children}

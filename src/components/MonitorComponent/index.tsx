@@ -142,7 +142,7 @@ export default function MonitorComponent() {
         const lHip = keypoints.find(kp => kp.name === 'left_hip');
         const lEar = keypoints.find(kp => kp.name === 'left_ear');
 
-        let validAngles: number[] = [];
+        const validAngles: number[] = [];
 
         // Calcular ángulo derecho si los puntos son visibles
         if (rShoulder && rHip && rEar && rShoulder.score! > MIN_SCORE && rHip.score! > MIN_SCORE && rEar.score! > MIN_SCORE) {

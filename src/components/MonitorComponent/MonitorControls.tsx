@@ -2,11 +2,11 @@ import { PostureMonitorState } from "@/types"
 
 type MonitorControlsProps = {
   monitorState: PostureMonitorState
-  startMonitoring: Function
+  startMonitoring: () => void
   isClient: boolean
   isModelLoading: boolean
   detector: any
-  stopMonitoring: Function
+  stopMonitoring: () => void
 }
 
 export const MonitorControls = ({
