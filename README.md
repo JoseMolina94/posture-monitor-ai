@@ -45,7 +45,7 @@ Since the AI libraries (**TensorFlow.js**) are large, this project uses **CDN li
 
 ### 1️⃣ Clone the repository
 ```bash
-git clone [your-repo-link]
+git clone https://github.com/JoseMolina94/posture-monitor-ai
 cd posture-monitor-ai
 ```
 
